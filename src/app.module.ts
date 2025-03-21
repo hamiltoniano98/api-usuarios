@@ -2,6 +2,7 @@ import { Logger, Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UsersModule } from './user/users.module';
 import { AuthModule } from './auth/auth.module';
+import { UsuariosGateway } from './common/sockets/usuarios/usuarios.gateway';
 import mongoose from 'mongoose';
 
 
@@ -23,7 +24,7 @@ import mongoose from 'mongoose';
     UsersModule,
     AuthModule,
   ],
-  providers: [],
+  providers: [UsuariosGateway],
   
 })
 export class AppModule {}

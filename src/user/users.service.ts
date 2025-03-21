@@ -1,17 +1,22 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User } from './schemas/user.schemas';
+import { UsuariosGateway } from 'src/common/sockets/usuarios/usuarios.gateway';
 
 
 @Injectable()
 export class UsersService {
-    constructor(@InjectModel('User') private userModel:Model<User>){}
+    constructor(
+    @InjectModel('User') private userModel:Model<User>,
+    @Inject(UsuariosGateway) private usuariosGateway: UsuariosGateway,
+    ){}
     
     //Crear usuario
     async create(user:User){
         try {
           const newUser=new this.userModel(user);
+          this.usuariosGateway.server.emit('mensaje','Usuario Creado')
         return newUser.save();
         } catch (error) {
           throw new Error('Error crear usuario');
