@@ -8,12 +8,18 @@ export class AuthService {
         private readonly jwtService:JwtService
     ){}
     async register(registerdto){
-        const user=await this.userService.findforEmail(registerdto.email)
+        try {
+            const user=await this.userService.findforEmail(registerdto.email)
         if(user){
             throw new BadRequestException('Ya existe el usuario')
         }
         return await this.userService.create(registerdto)
+        } catch (error) {
+            throw new Error('Error al crear usuario');
         }
+        }
+
+
     async login(loginuserdto){
         const user=await this.userService.findforEmail(loginuserdto.email)
         if(!user){
