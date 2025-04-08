@@ -1,21 +1,18 @@
 import { IsBoolean, IsEmail, IsNotEmpty, IsString } from 'class-validator';
 
-export class RegisterUserDto {
+export class CreateTaskDto {
   @IsString()
   @IsNotEmpty()
   name: string
 
-  @IsEmail() // Valida que el campo sea un email válido
-  email: string;
+  @IsString()
+  @IsNotEmpty() // Valida que el campo sea un email válido
+  description: string;
 
   @IsString() // Valida que el campo sea una cadena de texto
   @IsNotEmpty() // Valida que el campo no esté vacío
-  password: string;
-
-  @IsString() // Valida que el campo sea una cadena de texto
-  @IsNotEmpty()
-  carid: string
+  usermail: string;
 
   @IsBoolean()
-  admin: boolean;
+  completed: boolean;
 }

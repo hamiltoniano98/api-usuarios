@@ -13,7 +13,7 @@ export class AuthService {
         if(user){
             throw new BadRequestException('Ya existe el usuario')
         }
-        return await this.userService.create(registerdto)
+        const newuser =await this.userService.create(registerdto)
         } catch (error) {
             throw new Error('Error al crear usuario');
         }

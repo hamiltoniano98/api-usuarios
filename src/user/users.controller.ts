@@ -10,23 +10,15 @@ export class UsersController {
 
     //Obtener los usuario
     @Get()
-    @UseGuards(AuthGuard)
     async findAll(){
         return this.usersService.findAll()
-    }
-
-    //Obtener los usuario por email
-    @Get(':email')
-    @UseGuards(AuthGuard)
-    async findbyEmail(@Param('email') email: string){
-        return this.usersService.findforEmail(email)
     }
 
     //Obtener los usuario por id
     @Get(':id')
     @UseGuards(AuthGuard)
     async findbyId(@Param('id') id: string){
-        return this.usersService.findforEmail(id)
+        return this.usersService.findbyid(id)
     }
 
     @Put(':id')
